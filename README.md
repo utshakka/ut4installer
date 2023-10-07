@@ -22,3 +22,15 @@ Includes MonkeyPatch v1.0\
   -Fix occasional game crash on map change\
 Includes Audio Fix v1.1\
   -Allows you to change audio source after game is running (ie. start game with speakers, can plug in headphones without having to restart game)
+
+Prerequisites:
+----------------
+Go to:\
+https://downloads.ut4ever.box.ca/development/ut4installer/
+
+Download the two zip files and place them inside /Files/
+
+UnrealTournament (installer_v1.0.3).zip\
+UnrealTournamentUserDocuments (installer_v1.0.3).zip
+
+Too large and contains ut4 game code, so need to be hosted via external link
