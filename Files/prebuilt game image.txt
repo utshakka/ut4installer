@@ -1,0 +1,7 @@
+Two .zip files should be inside this folder
+
+UnrealTournament (installer_v1.0.3).zip
+UnrealTournamentUserDocuments (installer_v1.0.3).zip
+
+Too large and contains ut4 game code, so need to be downloaded via external link
+https://downloads.ut4ever.box.ca/development/ut4installer/
