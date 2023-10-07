@@ -29,99 +29,99 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form_ut4installer));
-            this.panel_sidebar = new System.Windows.Forms.Panel();
-            this.panel_finish = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel_install = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panelActiveDisplay = new System.Windows.Forms.Panel();
-            this.panel_sidebar.SuspendLayout();
-            this.panel_finish.SuspendLayout();
-            this.panel_install.SuspendLayout();
-            this.SuspendLayout();
+            panel_sidebar = new Panel();
+            panel_finish = new Panel();
+            label5 = new Label();
+            panel_install = new Panel();
+            label1 = new Label();
+            panelActiveDisplay = new Panel();
+            panel_sidebar.SuspendLayout();
+            panel_finish.SuspendLayout();
+            panel_install.SuspendLayout();
+            SuspendLayout();
             // 
             // panel_sidebar
             // 
-            this.panel_sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-            this.panel_sidebar.Controls.Add(this.panel_finish);
-            this.panel_sidebar.Controls.Add(this.panel_install);
-            this.panel_sidebar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel_sidebar.Location = new System.Drawing.Point(0, 0);
-            this.panel_sidebar.Name = "panel_sidebar";
-            this.panel_sidebar.Size = new System.Drawing.Size(143, 512);
-            this.panel_sidebar.TabIndex = 0;
+            panel_sidebar.BackColor = Color.FromArgb(33, 33, 33);
+            panel_sidebar.Controls.Add(panel_finish);
+            panel_sidebar.Controls.Add(panel_install);
+            panel_sidebar.Dock = DockStyle.Left;
+            panel_sidebar.Location = new Point(0, 0);
+            panel_sidebar.Name = "panel_sidebar";
+            panel_sidebar.Size = new Size(143, 512);
+            panel_sidebar.TabIndex = 0;
             // 
             // panel_finish
             // 
-            this.panel_finish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(42)))), ((int)(((byte)(42)))));
-            this.panel_finish.Controls.Add(this.label5);
-            this.panel_finish.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_finish.Location = new System.Drawing.Point(0, 45);
-            this.panel_finish.Name = "panel_finish";
-            this.panel_finish.Size = new System.Drawing.Size(143, 45);
-            this.panel_finish.TabIndex = 5;
+            panel_finish.BackColor = Color.FromArgb(42, 42, 42);
+            panel_finish.Controls.Add(label5);
+            panel_finish.Dock = DockStyle.Top;
+            panel_finish.Location = new Point(0, 45);
+            panel_finish.Name = "panel_finish";
+            panel_finish.Size = new Size(143, 45);
+            panel_finish.TabIndex = 5;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(13, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 18);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Finish";
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.ForeColor = Color.White;
+            label5.Location = new Point(13, 13);
+            label5.Name = "label5";
+            label5.Size = new Size(47, 18);
+            label5.TabIndex = 0;
+            label5.Text = "Finish";
             // 
             // panel_install
             // 
-            this.panel_install.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.panel_install.Controls.Add(this.label1);
-            this.panel_install.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel_install.Location = new System.Drawing.Point(0, 0);
-            this.panel_install.Name = "panel_install";
-            this.panel_install.Size = new System.Drawing.Size(143, 45);
-            this.panel_install.TabIndex = 0;
+            panel_install.BackColor = Color.FromArgb(55, 55, 55);
+            panel_install.Controls.Add(label1);
+            panel_install.Dock = DockStyle.Top;
+            panel_install.Location = new Point(0, 0);
+            panel_install.Name = "panel_install";
+            panel_install.Size = new Size(143, 45);
+            panel_install.TabIndex = 0;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(13, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Install";
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(13, 13);
+            label1.Name = "label1";
+            label1.Size = new Size(45, 18);
+            label1.TabIndex = 0;
+            label1.Text = "Install";
             // 
             // panelActiveDisplay
             // 
-            this.panelActiveDisplay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
-            this.panelActiveDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelActiveDisplay.Location = new System.Drawing.Point(143, 0);
-            this.panelActiveDisplay.Name = "panelActiveDisplay";
-            this.panelActiveDisplay.Size = new System.Drawing.Size(726, 512);
-            this.panelActiveDisplay.TabIndex = 1;
+            panelActiveDisplay.BackColor = Color.FromArgb(55, 55, 55);
+            panelActiveDisplay.Dock = DockStyle.Fill;
+            panelActiveDisplay.Location = new Point(143, 0);
+            panelActiveDisplay.Name = "panelActiveDisplay";
+            panelActiveDisplay.Size = new Size(726, 512);
+            panelActiveDisplay.TabIndex = 1;
             // 
             // form_ut4installer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(869, 512);
-            this.Controls.Add(this.panelActiveDisplay);
-            this.Controls.Add(this.panel_sidebar);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "form_ut4installer";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "UT4 Installer";
-            this.Load += new System.EventHandler(this.form_ut4installer_Load);
-            this.panel_sidebar.ResumeLayout(false);
-            this.panel_finish.ResumeLayout(false);
-            this.panel_finish.PerformLayout();
-            this.panel_install.ResumeLayout(false);
-            this.panel_install.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(869, 512);
+            Controls.Add(panelActiveDisplay);
+            Controls.Add(panel_sidebar);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            Name = "form_ut4installer";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "UT4 Installer";
+            Load += form_ut4installer_Load;
+            panel_sidebar.ResumeLayout(false);
+            panel_finish.ResumeLayout(false);
+            panel_finish.PerformLayout();
+            panel_install.ResumeLayout(false);
+            panel_install.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
