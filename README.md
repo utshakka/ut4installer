@@ -8,6 +8,10 @@ There has also been a handful of community developed content to fix issues and a
 
 This installer bundles it all into a convenient package
 
+The installer operates on a prebuilt ut4 image with all of the addon content already installed\
+Essentially unzips ut4 into desired directory and then performs remaining actions to finish configuring
+ut4uu install, master server connection, runtime dependencies, and desktop shortcut
+
 Features:
 ---------------
 Checks/installs game runtime dependencies normally installed by epic games launcher\
