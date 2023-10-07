@@ -13,17 +13,10 @@ This installer bundles it all into a convenient package
 Features:
 ---------------
 Checks/installs game runtime dependencies normally installed by epic games launcher
-
 Preconnected to new master server
-
 Preloaded with UT4UU v10.1.6
-
 Creates desktop shortcut with necessary parameters to start game without epic launcher
-
 Includes MonkeyPatch v1.0
-
-  -Fix occasional game crash on map change
-  
+  -Fix occasional game crash on map change  
 Includes Audio Fix v1.1
-
   -Allows you to change audio source after game is running (ie. start game with speakers, can plug in headphones without having to restart game)
