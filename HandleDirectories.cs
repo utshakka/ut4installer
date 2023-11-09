@@ -126,6 +126,11 @@ namespace UT4_Installer
                     return false;
                 }
             }
+            else
+            {
+                Logger.Log("UT4 installation game files missing", true);
+                return false;
+            }
 
             // check userdocs zip
             string userDocs = Path.Combine(runtimeDirectory, "Files", zipUserDocFilename);
@@ -137,6 +142,11 @@ namespace UT4_Installer
                     Logger.Log("User doc filesize read: " + length + " bytes   User doc filesize expected: " + zipGameFilesize + " bytes", true);
                     return false;
                 }
+            }
+            else
+            {
+                Logger.Log("UT4 installation config files missing", true);
+                return false;
             }
 
             return true;

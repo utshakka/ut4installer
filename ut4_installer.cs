@@ -39,8 +39,8 @@ namespace UT4_Installer
             userControl.Dock = DockStyle.Fill;
             panelActiveDisplay.Controls.Clear();
             panelActiveDisplay.Controls.Add(userControl);
-            userControl.BringToFront();         
-            
+            userControl.BringToFront();
+
             if (userControl == FormHelper.Form_UC_Install) FormHelper.activePanel = ActivePanel.Install;
             else if (userControl == FormHelper.Form_UC_Finish) FormHelper.activePanel = ActivePanel.Finish;
 
