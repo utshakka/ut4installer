@@ -64,12 +64,14 @@ namespace UT4_Installer.UserControls
         {
             btn_install.Enabled = true;
             btn_directory_install.Enabled = true;
+            FormHelper.Form_Main.EnableButtons();
         }
 
         public void disableButtons() 
         { 
             btn_install.Enabled = false;
             btn_directory_install.Enabled = false;
+            FormHelper.Form_Main.DisableButtons();
         }
 
         private void rtb_install_TextChanged(object sender, EventArgs e)

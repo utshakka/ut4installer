@@ -296,7 +296,7 @@ namespace UT4_Installer
             // if yes, check & append master server lines
             // if no, extract from /Files/
             installGame.ReportProgress(0, "Updating user document files to point to new master server");
-            UpdateUserDocumentFiles();
+            UpdateUserDocumentFiles(true);
 
             // update UU InstallInfo.bin in both locations
             installGame.ReportProgress(0, "Updating InstallInfo.bin files");
@@ -347,7 +347,7 @@ namespace UT4_Installer
 
         //Copy engine.ini with new master server links if not exist
         //Append master server lines in engine.ini if it does
-        private void UpdateUserDocumentFiles()
+        public void UpdateUserDocumentFiles(bool shouldLog)
         {
             string fileName = Path.Combine(runtimeDirectory, "Files", directories.GetZipUserDocFilename());
             string destFileName = @"\UnrealTournament\Saved\Config\WindowsNoEditor\Engine.ini";
@@ -361,7 +361,7 @@ namespace UT4_Installer
                 {
                     archive.ExtractToDirectory(extractPath, _progress);
                 }
-                Logger.Log("Engine.ini copied to " + fullDestPath, true);
+                if (shouldLog) { Logger.Log("Engine.ini copied to " + fullDestPath, true); }
             }
             else
             {
@@ -422,16 +422,16 @@ namespace UT4_Installer
                             }
                         }
                     }
-                    Logger.Log("Engine.ini already exists, updated with code to connect to new master server", true);
+                    if (shouldLog) { Logger.Log("Engine.ini already exists, updated with code to connect to new master server", true); }
                 }
                 else
                 {
-                    Logger.Log("Engine.ini already exists and new master server code is also present", true);
+                    if (shouldLog) { Logger.Log("Engine.ini already exists and new master server code is also present", true); }
                 }
             }
         }
 
-        private string[] toCheck = new string[]
+        public string[] toCheck = new string[]
         {
             "[OnlineSubsystemMcp.OnlineContentControlsServiceMcp UnrealTournamentDev]\r\nDomain=master-ut4.timiimit.com\r\nProtocol=https",
             "[OnlineSubsystemMcp.BaseServiceMcp]\r\nDomain=master-ut4.timiimit.com\r\nProtocol=https",
@@ -441,6 +441,59 @@ namespace UT4_Installer
             "[OnlineSubsystemMcp.PersonaServiceMcp]\r\nDomain=master-ut4.timiimit.com\r\nProtocol=https",
             "[OnlineSubsystemMcp.OnlineImageServiceMcp]\r\nDomain=master-ut4.timiimit.com\r\nProtocol=https"
         };
+
+        public string UpdateEngineIni(string engineIniPath)
+        {
+            string addedLines = "";
+            string engineContents = System.IO.File.ReadAllText(engineIniPath);
+
+            // check for new lines at end of text file, append if needed
+            if (engineContents.Length >= 2)
+            {
+                int numNewLines = 0;
+                if (engineContents[engineContents.Length - 1].ToString() == "\n" || engineContents[engineContents.Length - 1].ToString() == "\r\n" ||
+                    engineContents[engineContents.Length - 1].ToString() == "\r")
+                {
+                    numNewLines++;
+                }
+                if (engineContents[engineContents.Length - 2].ToString() == "\n" || engineContents[engineContents.Length - 2].ToString() == "\r\n" ||
+                    engineContents[engineContents.Length - 2].ToString() == "\r")
+                {
+                    numNewLines++;
+                }
+
+                using (StreamWriter sw = System.IO.File.AppendText(engineIniPath))
+                {
+                    while (numNewLines < 2)
+                    {
+                        sw.Write("\n");
+                        numNewLines++;
+                    }
+                }
+            }
+
+            for (int i = 0; i < toCheck.Length; i++)
+            {
+                if (!engineContents.Contains(toCheck[i]))
+                {
+                    using (StreamWriter sw = System.IO.File.AppendText(engineIniPath))
+                    {
+                        if (i == toCheck.Length - 1)
+                        {
+                            sw.Write(toCheck[i] + "\n");
+                        }
+                        else
+                        {
+                            sw.Write(toCheck[i] + "\n\n");
+                        }
+                        addedLines += toCheck[i];
+                        if (i < toCheck.Length - 1) addedLines += "\n\n";
+                    }
+                }
+            }
+
+            return addedLines;
+        }
 
         // Update InstallInfo.bin file created during normal UU install
         // must update sourceinstall path and character length of this install path
@@ -503,24 +556,63 @@ namespace UT4_Installer
         }
 
 
-        // Create game shortcut on desktop
+        // Create UT4 game shortcut
+        // No parameters defaults to user desktop with shortcut name as Unreal Tournament 4 UU.lnk
         public void CreateShortcut()
         {
-            WshShell shell = new();
+            CreateShortcut("Unreal Tournament 4",
+                Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
+                installDirectory,
+                true);
+        }
 
-            string shorcutDesktopLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), 
-                "Unreal Tournament 4 UU.lnk");
-            //"C:\Program Files\Epic Games\UnrealTournament\Engine\Binaries\Win64\UE4-Win64-Shipping.exe"
-            string fullPathToExe = Path.Combine(installDirectory, @"Engine\Binaries\Win64\UE4-Win64-Shipping.exe");
+        // mainInstall=true    used to force shortcut overwrite at end of installation process
+        // mainInstall=false   asks user if they wish to overwrite, used the separate create shortcut process
+        //                        outside of the main installation process
+        public void CreateShortcut(string shortcutName, string shortcutDestDir, string UT4BaseDir, bool mainInstall)
+        {
+            bool createShortcut = false;
 
-            IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(shorcutDesktopLocation);
-            shortcut.TargetPath = fullPathToExe;
-            shortcut.WorkingDirectory = Path.GetDirectoryName(fullPathToExe);
-            shortcut.Arguments = "UnrealTournament -epicapp=UnrealTournamentDev -epicenv=Prod -EpicPortal";
-            shortcut.IconLocation = fullPathToExe + ", 0";
-            shortcut.Description = "Run Unreal Tournament 4 as if it was ran from Epic Games Launcher";
-            shortcut.Hotkey = "Ctrl+Shift+U";
-            shortcut.Save();
+            string fullShortcutDestPath = Path.Combine(shortcutDestDir, shortcutName+".lnk");
+            //ex. "C:\Program Files\Epic Games\UnrealTournament\" + "Engine\Binaries\Win64\UE4-Win64-Shipping.exe"
+            string fullPathToExe = Path.Combine(UT4BaseDir, @"Engine\Binaries\Win64\UE4-Win64-Shipping.exe");
+
+            // if part of the main install, always create shortcut
+            if (mainInstall)
+            {
+                createShortcut = true;
+            }
+            else
+            {
+                // if not part of the main install, check for existing shortcuts of the same name
+                // and prompt user if they wish to overwrite
+                if (System.IO.File.Exists(fullShortcutDestPath))
+                {
+                    DialogResult result = MessageBox.Show("Shortcut already exists at desired location, do you wish to overwrite it?", "Shortcut already exists...",
+                        MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes) { createShortcut = true; }
+                    else { MessageBox.Show("Shortcut not created"); }
+                }
+                else
+                {
+                    createShortcut = true;
+                }
+            }
+
+            if (createShortcut)
+            {
+                WshShell shell = new();
+                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(fullShortcutDestPath);
+                shortcut.TargetPath = fullPathToExe;
+                shortcut.WorkingDirectory = Path.GetDirectoryName(fullPathToExe);
+                shortcut.Arguments = "UnrealTournament -epicapp=UnrealTournamentDev -epicenv=Prod -EpicPortal";
+                shortcut.IconLocation = fullPathToExe + ", 0";
+                shortcut.Description = "Run Unreal Tournament 4 as if it was ran from Epic Games Launcher";
+                shortcut.Save();
+
+                if (!mainInstall) { MessageBox.Show("UT4 shortcut created at:\n" + fullShortcutDestPath); }
+            }
+
         }
 
         private void ZipReport(object sender, ZipProgress zipProgress)

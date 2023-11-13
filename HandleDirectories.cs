@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,8 +17,8 @@ namespace UT4_Installer
         private const int diskSpaceRequiredMB = 19500;
 
         // Expected install file names and file sizes
-        private const string zipGameFilename = "UnrealTournament (installer_v1.0.3).zip";
-        private const string zipUserDocFilename = "UnrealTournamentUserDocuments (installer_v1.0.3).zip";
+        private const string zipGameFilename = "UnrealTournament (installer_v1.1.0).zip";
+        private const string zipUserDocFilename = "UnrealTournamentUserDocuments (installer_v1.1.0).zip";
 
         private const long zipGameFilesize = 10429026048; // bytes
         private const long zipUserDocFilesize = 1088; // bytes
@@ -72,6 +73,38 @@ namespace UT4_Installer
             }
         }
 
+        // suggests user desktop path as location to create new shortcut
+        public string SuggestShortcutDestDir()
+        {
+            try
+            {
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                if (Directory.Exists(desktopPath)) { return desktopPath; }
+                else { return ""; }
+            }
+            catch
+            {
+                return "";
+            }
+            
+        }
+
+        public string SuggestEngineIniPath()
+        {
+            try
+            {
+                string engineIniPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                                                    @"UnrealTournament\Saved\Config\WindowsNoEditor\Engine.ini");
+
+                if (File.Exists(engineIniPath)) { return engineIniPath; }
+                else { return ""; }
+
+            }
+            catch
+            {
+                return "";
+            }
+        }
 
         //////////////////////////////////////////////////////////////////////////
         ///////////       VALIDATION CHECKS ON SELECTED PATHS        /////////////
@@ -139,7 +172,7 @@ namespace UT4_Installer
                 long length = new System.IO.FileInfo(userDocs).Length;
                 if (length != zipUserDocFilesize)
                 {
-                    Logger.Log("User doc filesize read: " + length + " bytes   User doc filesize expected: " + zipGameFilesize + " bytes", true);
+                    Logger.Log("User doc filesize read: " + length + " bytes   User doc filesize expected: " + zipUserDocFilesize + " bytes", true);
                     return false;
                 }
             }

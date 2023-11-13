@@ -1,17 +1,21 @@
 
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using UT4_Installer.UserControls;
 
 namespace UT4_Installer
 {
     public partial class form_ut4installer : Form
     {
-        private Panel[] panelSidebarTabs = new Panel[2];
+        private List<Panel> panelSidebarList = new List<Panel>();
+        private bool showCreateShortcut = false;
+        private bool showCheckMasterServer = false;
 
         public form_ut4installer()
         {
             InitializeComponent();
             FormHelper.Form_Main = this;
+
 
             // Force title bar to dark
             UseImmersiveDarkMode(this.Handle, true);
@@ -23,14 +27,16 @@ namespace UT4_Installer
             FormHelper.activePanel = ActivePanel.Install;
             updateDisplay(uc);
 
-            createSidebarPanelGroup();
+            createSidebarPanelList();
         }
 
         // Creates a Panel array containing all of the sidebar panel tabs
-        private void createSidebarPanelGroup()
+        private void createSidebarPanelList()
         {
-            panelSidebarTabs[0] = panel_install;
-            panelSidebarTabs[1] = panel_finish;
+            panelSidebarList.Add(panel_install);
+            panelSidebarList.Add(panel_finish);
+            panelSidebarList.Add(panel_createShortcut);
+            panelSidebarList.Add(panel_checkMasterServer);
         }
 
         // load desired UserControl form into active display panel (main window that user sees)
@@ -43,25 +49,118 @@ namespace UT4_Installer
 
             if (userControl == FormHelper.Form_UC_Install) FormHelper.activePanel = ActivePanel.Install;
             else if (userControl == FormHelper.Form_UC_Finish) FormHelper.activePanel = ActivePanel.Finish;
+            else if (userControl == FormHelper.Form_UC_CreateShortcut) FormHelper.activePanel = ActivePanel.CreateShortcut;
+            else if (userControl == FormHelper.Form_UC_CheckMasterServer) { FormHelper.activePanel = ActivePanel.CheckMasterServer; }
 
-            highlightSelectedTabOnly(FormHelper.activePanel);
+            HighlightSelectedTabOnly(FormHelper.activePanel);
         }
 
         // update sidebar panel tab color so that only the current tab
         // has a different color compared to other non-active tabs
-        private void highlightSelectedTabOnly(ActivePanel activePanel)
+        private void HighlightSelectedTabOnly(ActivePanel activePanel)
         {
-            if (activePanel == ActivePanel.Install)
+            Panel curPanel = new Panel();
+            if (activePanel == ActivePanel.Install) { curPanel = panel_install; }
+            else if (activePanel == ActivePanel.Finish) { curPanel = panel_finish; }
+            else if (activePanel == ActivePanel.CreateShortcut) { curPanel = panel_createShortcut; }
+            else if (activePanel == ActivePanel.CheckMasterServer) { curPanel = panel_checkMasterServer; }
+
+            foreach (Panel panel in panelSidebarList)
             {
-                panel_install.BackColor = Color.FromArgb(55, 55, 55);
-                panel_finish.BackColor = Color.FromArgb(42, 42, 42);
-            }
-            else // (FormHelper.activePanel == ActivePanel.Finish)
-            {
-                panel_install.BackColor = Color.FromArgb(42, 42, 42);
-                panel_finish.BackColor = Color.FromArgb(55, 55, 55);
+                if (panel == curPanel)
+                {
+                    panel.BackColor = Color.FromArgb(55, 55, 55);
+                }
+                else
+                {
+                    panel.BackColor = Color.FromArgb(42, 42, 42);
+                }
             }
         }
+
+        // disables extra buttons for when install is happening
+        public void DisableButtons()
+        {
+            btn_checkMasterServerPanel.Enabled = false;
+            btn_createShortcutPanel.Enabled = false;
+        }
+        // enables extra buttons for after install
+        public void EnableButtons()
+        {
+            btn_checkMasterServerPanel.Enabled = true;
+            btn_createShortcutPanel.Enabled = true;
+        }
+
+        private void updateExtraButtonLabels()
+        {
+            if (showCreateShortcut)
+            {
+                btn_createShortcutPanel.Text = "Create Shorcut\r\nHide";
+            }
+            else
+            {
+                btn_createShortcutPanel.Text = "Create Shorcut\r\nShow";
+            }
+
+            if (showCheckMasterServer)
+            {
+                btn_checkMasterServerPanel.Text = "Check Master Server\r\nHide";
+            }
+            else
+            {
+                btn_checkMasterServerPanel.Text = "Check Master Server\r\nShow";
+            }
+        }
+
+        private void btn_createShortcutPanel_Click(object sender, EventArgs e)
+        {
+            if (!showCreateShortcut)
+            {
+                UC_CreateShortcut uc = new UC_CreateShortcut();
+                FormHelper.activePanel = ActivePanel.CreateShortcut;
+                updateDisplay(uc);
+
+                showCreateShortcut = true;
+                showCheckMasterServer = false;
+                updateExtraButtonLabels();
+            }
+            else
+            {
+                UC_Install uc = new UC_Install();
+                FormHelper.activePanel = ActivePanel.Install;
+                updateDisplay(uc);
+
+                showCreateShortcut = false;
+                showCheckMasterServer = false;
+                updateExtraButtonLabels();
+            }
+
+        }
+        private void btn_checkMasterServerPanel_Click(object sender, EventArgs e)
+        {
+            if (!showCheckMasterServer)
+            {
+                UC_CheckMasterServer uc = new UC_CheckMasterServer();
+                FormHelper.activePanel = ActivePanel.CheckMasterServer;
+                updateDisplay(uc);
+
+                showCreateShortcut = false;
+                showCheckMasterServer = true;
+                updateExtraButtonLabels();
+            }
+            else
+            {
+                UC_Install uc = new UC_Install();
+                FormHelper.activePanel = ActivePanel.Install;
+                updateDisplay(uc);
+
+                showCreateShortcut = false;
+                showCheckMasterServer = false;
+                updateExtraButtonLabels();
+            }
+        }
+
+
 
 
         //Used for forcing dark title bar on winform

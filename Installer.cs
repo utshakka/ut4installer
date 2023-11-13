@@ -43,5 +43,10 @@ namespace UT4_Installer
             installerConfig.InstallGame();
         }
 
+        public static void CreateShortcut(string shortcutName, string shortcutDestDir, string UT4BaseDir)
+        {
+            installerConfig.CreateShortcut(shortcutName, shortcutDestDir, UT4BaseDir, false);
+        }
+
     }
 }

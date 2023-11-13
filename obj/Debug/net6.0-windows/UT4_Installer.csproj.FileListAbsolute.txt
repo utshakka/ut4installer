@@ -178,3 +178,5 @@ C:\Users\dylan\Source\Repos\ut4installer\obj\Debug\net6.0-windows\refint\UT4_Ins
 C:\Users\dylan\Source\Repos\ut4installer\obj\Debug\net6.0-windows\UT4_Installer.pdb
 C:\Users\dylan\Source\Repos\ut4installer\obj\Debug\net6.0-windows\UT4_Installer.genruntimeconfig.cache
 C:\Users\dylan\Source\Repos\ut4installer\obj\Debug\net6.0-windows\ref\UT4_Installer.dll
+C:\Users\dylan\source\repos\ut4installer\obj\Debug\net6.0-windows\UT4_Installer.UserControls.UC_CreateShortcut.resources
+C:\Users\dylan\source\repos\ut4installer\obj\Debug\net6.0-windows\UT4_Installer.UserControls.UC_CheckMasterServer.resources
