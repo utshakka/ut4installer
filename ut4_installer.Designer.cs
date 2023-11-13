@@ -30,12 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form_ut4installer));
             panel_sidebar = new Panel();
+            panel_createShortcut = new Panel();
+            btn_createShortcutPanel = new Button();
+            panel_checkMasterServer = new Panel();
+            btn_checkMasterServerPanel = new Button();
             panel_finish = new Panel();
             label5 = new Label();
             panel_install = new Panel();
             label1 = new Label();
             panelActiveDisplay = new Panel();
             panel_sidebar.SuspendLayout();
+            panel_createShortcut.SuspendLayout();
+            panel_checkMasterServer.SuspendLayout();
             panel_finish.SuspendLayout();
             panel_install.SuspendLayout();
             SuspendLayout();
@@ -43,6 +49,8 @@
             // panel_sidebar
             // 
             panel_sidebar.BackColor = Color.FromArgb(33, 33, 33);
+            panel_sidebar.Controls.Add(panel_createShortcut);
+            panel_sidebar.Controls.Add(panel_checkMasterServer);
             panel_sidebar.Controls.Add(panel_finish);
             panel_sidebar.Controls.Add(panel_install);
             panel_sidebar.Dock = DockStyle.Left;
@@ -50,6 +58,56 @@
             panel_sidebar.Name = "panel_sidebar";
             panel_sidebar.Size = new Size(143, 512);
             panel_sidebar.TabIndex = 0;
+            // 
+            // panel_createShortcut
+            // 
+            panel_createShortcut.BackColor = Color.FromArgb(42, 42, 42);
+            panel_createShortcut.Controls.Add(btn_createShortcutPanel);
+            panel_createShortcut.Dock = DockStyle.Bottom;
+            panel_createShortcut.Location = new Point(0, 362);
+            panel_createShortcut.Name = "panel_createShortcut";
+            panel_createShortcut.Size = new Size(143, 75);
+            panel_createShortcut.TabIndex = 7;
+            // 
+            // btn_createShortcutPanel
+            // 
+            btn_createShortcutPanel.BackColor = Color.FromArgb(42, 42, 42);
+            btn_createShortcutPanel.FlatAppearance.BorderColor = Color.FromArgb(92, 92, 92);
+            btn_createShortcutPanel.FlatStyle = FlatStyle.Flat;
+            btn_createShortcutPanel.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_createShortcutPanel.ForeColor = Color.White;
+            btn_createShortcutPanel.Location = new Point(4, 14);
+            btn_createShortcutPanel.Name = "btn_createShortcutPanel";
+            btn_createShortcutPanel.Size = new Size(134, 46);
+            btn_createShortcutPanel.TabIndex = 33;
+            btn_createShortcutPanel.Text = "Create Shorcut\r\nShow";
+            btn_createShortcutPanel.UseVisualStyleBackColor = false;
+            btn_createShortcutPanel.Click += btn_createShortcutPanel_Click;
+            // 
+            // panel_checkMasterServer
+            // 
+            panel_checkMasterServer.BackColor = Color.FromArgb(42, 42, 42);
+            panel_checkMasterServer.Controls.Add(btn_checkMasterServerPanel);
+            panel_checkMasterServer.Dock = DockStyle.Bottom;
+            panel_checkMasterServer.Location = new Point(0, 437);
+            panel_checkMasterServer.Name = "panel_checkMasterServer";
+            panel_checkMasterServer.Size = new Size(143, 75);
+            panel_checkMasterServer.TabIndex = 6;
+            // 
+            // btn_checkMasterServerPanel
+            // 
+            btn_checkMasterServerPanel.BackColor = Color.FromArgb(42, 42, 42);
+            btn_checkMasterServerPanel.FlatAppearance.BorderColor = Color.FromArgb(92, 92, 92);
+            btn_checkMasterServerPanel.FlatStyle = FlatStyle.Flat;
+            btn_checkMasterServerPanel.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btn_checkMasterServerPanel.ForeColor = Color.White;
+            btn_checkMasterServerPanel.Location = new Point(4, 14);
+            btn_checkMasterServerPanel.Name = "btn_checkMasterServerPanel";
+            btn_checkMasterServerPanel.Size = new Size(134, 46);
+            btn_checkMasterServerPanel.TabIndex = 34;
+            btn_checkMasterServerPanel.Text = "Check Master Server\r\nShow";
+            btn_checkMasterServerPanel.UseVisualStyleBackColor = false;
+            btn_checkMasterServerPanel.Click += btn_checkMasterServerPanel_Click;
             // 
             // panel_finish
             // 
@@ -114,9 +172,11 @@
             MaximizeBox = false;
             Name = "form_ut4installer";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "UT4 Installer";
+            Text = "UT4 Installer - v1.1.0";
             Load += form_ut4installer_Load;
             panel_sidebar.ResumeLayout(false);
+            panel_createShortcut.ResumeLayout(false);
+            panel_checkMasterServer.ResumeLayout(false);
             panel_finish.ResumeLayout(false);
             panel_finish.PerformLayout();
             panel_install.ResumeLayout(false);
@@ -132,5 +192,9 @@
         private Label label5;
         private Panel panel_install;
         private Label label1;
+        private Panel panel_checkMasterServer;
+        private Panel panel_createShortcut;
+        private Button btn_createShortcutPanel;
+        private Button btn_checkMasterServerPanel;
     }
 }

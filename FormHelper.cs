@@ -11,14 +11,18 @@ namespace UT4_Installer
     public enum ActivePanel
     {
         Install,
-        Finish
+        Finish,
+        CreateShortcut,
+        CheckMasterServer
     }
 
     public class FormHelper
     {
-        public static form_ut4installer Form_Main;
-        public static UC_Install Form_UC_Install;
-        public static UC_Finish Form_UC_Finish;
+        public static form_ut4installer? Form_Main;
+        public static UC_Install? Form_UC_Install;
+        public static UC_Finish? Form_UC_Finish;
+        public static UC_CreateShortcut? Form_UC_CreateShortcut;
+        public static UC_CheckMasterServer? Form_UC_CheckMasterServer;
 
 
         public static ActivePanel activePanel=ActivePanel.Install;

@@ -11,7 +11,7 @@
         "projectName": "UT4_Installer",
         "projectPath": "C:\\Users\\dylan\\source\\repos\\ut4installer\\UT4_Installer.csproj",
         "packagesPath": "C:\\Users\\dylan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dylan\\Source\\Repos\\ut4installer\\obj\\",
+        "outputPath": "C:\\Users\\dylan\\source\\repos\\ut4installer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\dylan\\AppData\\Roaming\\NuGet\\NuGet.Config",
