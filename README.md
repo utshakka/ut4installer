@@ -30,7 +30,7 @@ https://downloads.ut4ever.box.ca/development/ut4installer/
 
 Download the two zip files and place them inside /Files/
 
-UnrealTournament (installer_v1.0.3).zip\
-UnrealTournamentUserDocuments (installer_v1.0.3).zip
+UnrealTournament (installer_vx.x.x).zip\
+UnrealTournamentUserDocuments (installer_vx.x.x).zip
 
 Too large and contains ut4 game code, so need to be hosted via external link
